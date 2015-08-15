@@ -4,3 +4,26 @@ cols = df.columns
 cols = cols.map(lambda x: re.sub(r'[^a-zA-Z0-9]', '', x))
 df.columns = cols
 
+#when a library or module isn't in your path
+import sys
+sys.path.append('/Users/luke/dev/some_module')
+
+#easy way to combine two dataframes. 
+df = [df1, df2]
+df = pd.concat(df)
+
+#merge dataframes based on a key
+df = pd.merge(left=df, right=df3, on=["Order Number"])
+
+#new dataframe that is a sample of a large df. In this case, take the first 100 rows
+df_sample = df.loc[:100].copy()
+
+#adding to a df (df_sample) from another (dfo) based on two keys (OriginCity, OriginState_ProvinceCode)
+df_sample = pd.merge(left=df_sample, right=dfo, on=["OriginCity", "OriginState_ProvinceCode"])
+
+#find the unique values from a df column
+pd.Series(df.somecolumn.ravel()).unique()
+
+#updating value in a df. First create a filter based on what criteria we are updating, "XYZ INC.", then use that filter to #perform a replace
+filter = df1.CustomerName == "XYZ INC."
+df1.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
