@@ -1,0 +1,6 @@
+#rename columns on dataframe, taking out any non-alpha, non-numeric stuff
+import re
+cols = df.columns
+cols = cols.map(lambda x: re.sub(r'[^a-zA-Z0-9]', '', x))
+df.columns = cols
+
