@@ -25,5 +25,5 @@ df_sample = pd.merge(left=df_sample, right=dfo, on=["OriginCity", "OriginState_P
 pd.Series(df.somecolumn.ravel()).unique()
 
 #updating value in a df. First create a filter based on what criteria we are updating, "XYZ INC.", then use that filter to #perform a replace
-filter = df1.CustomerName == "XYZ INC."
-df1.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
+filter = df.CustomerName == "XYZ INC."
+df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
