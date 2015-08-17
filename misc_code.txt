@@ -33,3 +33,9 @@ df.rename(columns={"OldColumn":"NewColumn"}, inplace=True)
 
 #get a list of the data types in the data frame
 df.dtypes
+
+#set the datatype for a certain column on import
+dfLL = pd.read_csv("/Users/tlps1/dev/projects/zipcodes.csv",dtype={"Zipcode" : "object" })
+
+#delete a column 
+df.drop('Longitude_y', axis=1, inplace=True)
