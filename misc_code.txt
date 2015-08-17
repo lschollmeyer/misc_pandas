@@ -30,3 +30,6 @@ df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
 
 #rename a column
 df.rename(columns={"OldColumn":"NewColumn"}, inplace=True)
+
+#get a list of the data types in the data frame
+df.dtypes
