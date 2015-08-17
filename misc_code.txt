@@ -27,3 +27,6 @@ pd.Series(df.somecolumn.ravel()).unique()
 #updating value in a df. First create a filter based on what criteria we are updating, "XYZ INC.", then use that filter to #perform a replace
 filter = df.CustomerName == "XYZ INC."
 df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
+
+#rename a column
+df.rename(columns={"OldColumn":"NewColumn"}, inplace=True)
