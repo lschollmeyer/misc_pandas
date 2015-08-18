@@ -1,3 +1,15 @@
+#slicing df rows - this gets rows indexed on lines 7-14 in df "wine"
+wine[7:14]
+
+#slicing row and column: this gets the row indexed on the 8th line and only from the column "abv" in the wine df
+wine.loc[8, 'abv']
+
+#same thing, now getting a larger slice of rows (actually referencing my row label), 8-11, from the abv column
+wine.loc[8:11, 'abv']
+
+#same as above, but now getting a larger swath of related columns
+wine.loc[8:11, ['abv', 'ash', 'color']]
+
 #rename columns on dataframe, taking out any non-alpha, non-numeric stuff
 import re
 cols = df.columns
