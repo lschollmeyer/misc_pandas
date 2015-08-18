@@ -10,6 +10,24 @@ wine.loc[8:11, 'abv']
 #same as above, but now getting a larger swath of related columns
 wine.loc[8:11, ['abv', 'ash', 'color']]
 
+#grab specific rows, but all the columns
+wine.loc[8:11, :]
+
+#grab all the rows, but only a couple of columns, abv and ash
+wine.loc[:, ['abv', 'ash']]
+
+#you can use iloc for similar slicing, but it will only take integer values - this is the 60th row out of the 6th column
+mpg.iloc[60, 6]
+
+#ranges using iloc - rows 60-64 and columns 6-9
+mpg.iloc[60:64, 6:9]
+
+#using iloc to get all the rows, but just three columns (6-9)
+mpg.iloc[:, 6:9]
+
+#similarly, grabbing all the columns, but a few rows (1-7)
+mpg.iloc[1:7, :]
+
 #rename columns on dataframe, taking out any non-alpha, non-numeric stuff
 import re
 cols = df.columns
