@@ -28,6 +28,11 @@ mpg.iloc[:, 6:9]
 #similarly, grabbing all the columns, but a few rows (1-7)
 mpg.iloc[1:7, :]
 
+#using a boolean reference on a column value to slice the data. Getting all the rows and columns where column "wine_type" is 1 wine[wine["wine_type"] == 1]
+
+#you can use the tilda (~) to indicate a NOT. In this case, looking for all values in the magnesium column that is not less than 100 (notice the () )
+wine[~(wine["magnesium"] < 100)]
+
 #rename columns on dataframe, taking out any non-alpha, non-numeric stuff
 import re
 cols = df.columns
