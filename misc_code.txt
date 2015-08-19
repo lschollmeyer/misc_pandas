@@ -33,6 +33,22 @@ mpg.iloc[1:7, :]
 #you can use the tilda (~) to indicate a NOT. In this case, looking for all values in the magnesium column that is not less than 100 (notice the () )
 wine[~(wine["magnesium"] < 100)]
 
+#chaining boolean indexers. In this case all data in that has a magnesium count under 100 and a wine_type of 1
+wine[(wine["magnesium"] < 100) & (wine["wine_type"] == 1)]
+
+#isin function has a wide spectrum in a frame to find data, will return a grid of True, False values based on row index and columns  
+values = [8, 150, 12.0, 'ford torino']
+mgp.isin(values)
+
+#create a df and append a row
+df = pd.DataFrame({"col1":["row1col1", "row2col1", "row3col1"], "col2":["row1col2", "row2col2", "row3col2"]})
+df.append({"col1":"row3col1", "col2":"row3col2"}, ignore_index=True)
+
+
+#add column to that df
+df["col3"] = ["row1col3", "row2col3", "row3col3"]
+
+
 #rename columns on dataframe, taking out any non-alpha, non-numeric stuff
 import re
 cols = df.columns
@@ -43,9 +59,20 @@ df.columns = cols
 import sys
 sys.path.append('/Users/luke/dev/some_module')
 
+#::: Merging data frames:::
+
 #easy way to combine two dataframes. 
 df = [df1, df2]
 df = pd.concat(df)
+
+#you can also do this if they share a common key which pandas will automatically use for the join criteria - in this case, left outer:
+pd.merge(df1, df2)
+
+#or this - this is the same as above - same key, left outer join with df1 being the left table, df2 beging the right:
+df1.merge(df2)
+
+#join will let you join two data frames which might not have a key, but will use the row index - in this case, if df1 has five rows and df2 has four, the column(s) from df2 will be added, but the last row with be NaN in that/those column(s)
+df1.join(df2) 
 
 #merge dataframes based on a key
 df = pd.merge(left=df, right=df3, on=["Order Number"])
