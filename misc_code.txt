@@ -44,6 +44,8 @@ mgp.isin(values)
 df = pd.DataFrame({"col1":["row1col1", "row2col1", "row3col1"], "col2":["row1col2", "row2col2", "row3col2"]})
 df.append({"col1":"row3col1", "col2":"row3col2"}, ignore_index=True)
 
+#get rid of scientific notation 
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
 #add column to that df
 df["col3"] = ["row1col3", "row2col3", "row3col3"]
@@ -93,6 +95,14 @@ df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
 #rename a column
 df.rename(columns={"OldColumn":"NewColumn"}, inplace=True)
 
+#another example
+dfMayflower.rename(columns={"I_Shipments" : "Shipments_I", 
+                         "I_Avg_Billed_Wt" : "Avg_Billed_Wt_I", 
+                         "I_Avg_Miles" : "Avg_Miles_I",
+                         "C_Shipments" : "Shipments", 
+                         "C_Avg_Billed_Wt" : "Avg_Billed_Wt", 
+                         "C_Avg_Miles" : "Avg_Miles"}, inplace=True)
+                         
 #get a list of the data types in the data frame
 df.dtypes
 
