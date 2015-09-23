@@ -111,3 +111,6 @@ dfLL = pd.read_csv("/Users/tlps1/dev/projects/zipcodes.csv",dtype={"Zipcode" : "
 
 #delete a column 
 df.drop('Longitude_y', axis=1, inplace=True)
+
+#delete dups in a dataframe
+q = q.drop_duplicates(["NBR_QUOT", "DATE_QUOT", "CITY_ORG", "ST_ORG", "DATE_LOAD"])
