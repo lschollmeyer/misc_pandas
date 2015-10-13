@@ -92,6 +92,9 @@ pd.Series(df.somecolumn.ravel()).unique()
 filter = df.CustomerName == "XYZ INC."
 df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
 
+#delete rows based on column values
+df = df[df['State'] != 'NJ']
+
 #rename a column
 df.rename(columns={"OldColumn":"NewColumn"}, inplace=True)
 
