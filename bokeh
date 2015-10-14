@@ -1,0 +1,31 @@
+import bokeh.plotting as bp
+from bokeh.sampledata import us_states
+us_states = us_states.data.copy()
+
+
+del us_states["HI"]
+del us_states["AK"]
+
+state_xs = [us_states[code]["lons"] for code in us_states]
+state_ys = [us_states[code]["lats"] for code in us_states]
+
+
+bp.output_file("test.html", title="Test Map")
+
+TOOLS = 'box_zoom,box_select,resize,reset,hover'
+
+fig = bp.figure(title="Test Map", toolbar_location="left", tools=TOOLS,
+    plot_width=1100, plot_height=700+6)
+
+fig.patches(state_xs, state_ys, fill_alpha=0.0,
+    line_color="#884444", line_width=2)
+p2 = fig.triangle(wmap["DropLong"], wmap["DropLat"], size= 20, color="red", source=source)
+
+p2.select(dict(type=HoverTool)).tooltips = {
+    "Van ID": "@id",
+    "Drop Date": "@date",
+    "City": "@city"
+}
+
+
+bp.show(fig)
