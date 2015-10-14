@@ -1,0 +1,98 @@
+import pandas as pd
+import math
+def AddCircle(latin, lonin, radius):
+    locs = []
+    lat1 = latin * math.pi/180.0
+    lon1 = lonin * math.pi/180.0 
+    d = radius/3956
+    
+    for x in range(361):
+        tc = (x / 90) * math.pi / 2
+        lat = math.asin(math.sin(lat1)*math.cos(d)+math.cos(lat1)*math.sin(d)*math.cos(tc))
+        lat = 180.0 * lat / math.pi 
+        
+        if (math.cos(lat1)==0): 
+            lon=lonin
+        else: 
+            lon = ((lon1 - math.asin(math.sin(tc) * math.sin(d)/math.cos(lat1)) + math.pi) % (2 * math.pi)) - math.pi
+
+        lon = 180.0 * lon / math.pi
+        
+        locs.append([lat,lon]) 
+        
+    return locs
+            
+def getCircleLats(latin, lonin, radius):
+    lats = []
+    lat1 = latin * math.pi/180.0
+    lon1 = lonin * math.pi/180.0 
+    d = radius/3956
+    
+    for x in range(361):
+        tc = (x / 90) * math.pi / 2
+        lat = math.asin(math.sin(lat1)*math.cos(d)+math.cos(lat1)*math.sin(d)*math.cos(tc))
+        lat = 180.0 * lat / math.pi 
+
+        lats.append(lat) 
+        
+    return lats
+
+def getCircleLons(latin, lonin, radius):
+    lons = []
+    lat1 = latin * math.pi/180.0
+    lon1 = lonin * math.pi/180.0 
+    d = radius/3956
+    
+    for x in range(361):
+        tc = (x / 90) * math.pi / 2
+       
+        if (math.cos(lat1)==0): 
+            lon=lonin
+        else: 
+            lon = ((lon1 - math.asin(math.sin(tc) * math.sin(d)/math.cos(lat1)) + math.pi) % (2 * math.pi)) - math.pi
+
+        lon = 180.0 * lon / math.pi
+        
+        lons.append(lon) 
+        
+    return lons
+
+
+import bokeh.plotting as bp
+from bokeh.sampledata import us_states
+us_states = us_states.data.copy()
+
+
+del us_states["HI"]
+del us_states["AK"]
+
+state_xs = [us_states[code]["lons"] for code in us_states]
+state_ys = [us_states[code]["lats"] for code in us_states]
+
+bp.output_file("test.html", title="Test Map")
+
+TOOLS = 'box_zoom,box_select,resize,reset'
+
+fig = bp.figure(title="Test Map", toolbar_location="left", tools=TOOLS,
+    plot_width=1100, plot_height=700+6)
+
+fig.patches(state_xs, state_ys, fill_alpha=0.0,
+    line_color="#884444", line_width=2)
+
+d_cities = [{'city': 'Omaha', 'lat': 41.257160,'lon': -95.995102},
+            {'city': 'Lincoln', 'lat': 40.806862,'lon': -96.681679}, 
+            {'city': 'Kansas City', 'lat': 39.007504,'lon': -94.529625}]
+
+df = pd.DataFrame(d_cities)
+
+for index, row in df.iterrows():
+    fig.patch(getCircleLons(row['lat'], row['lon'], 25), getCircleLats(row['lat'], row['lon'], 25),  
+        fill_color="blue", fill_alpha=0.2, line_color="blue", line_width=1)
+    fig.patch(getCircleLons(row['lat'], row['lon'], 50), getCircleLats(row['lat'], row['lon'], 50),  
+        fill_color="red", fill_alpha=0.2, line_color="red", line_width=1)
+    fig.patch(getCircleLons(row['lat'], row['lon'], 75), getCircleLats(row['lat'], row['lon'], 75),  
+        fill_color="green", fill_alpha=0.2, line_color="green", line_width=1)
+
+    fig.circle(row['lon'], row['lat'], size=3, color="purple", alpha=1) # ~50 miles
+
+bp.show(fig)
