@@ -88,6 +88,13 @@ df_sample = pd.merge(left=df_sample, right=dfo, on=["OriginCity", "OriginState_P
 #find the unique values from a df column
 pd.Series(df.somecolumn.ravel()).unique()
 
+#find the unique values from multiple df columns
+x = cg.loc[(cg['destcentercity50'] == 1), 
+       ['destcity', 'deststate', 'dest_longitude', 'dest_latitude']].copy()
+pd.unique(x.values.ravel())
+
+df.drop_duplicates()
+
 #updating value in a df. First create a filter based on what criteria we are updating, "XYZ INC.", then use that filter to #perform a replace
 filter = df.CustomerName == "XYZ INC."
 df.loc[filter, "CustomerName"] = "XYZ INCORPORTATED"
