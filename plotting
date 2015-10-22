@@ -1,0 +1,15 @@
+from pandas.tools.plotting import scatter_matrix
+scatter_matrix(df, alpha=0.05, figsize=(18,18), diagonal='kde')
+
+#pandas scatterplot
+df.plot(kind='scatter', x='kmcluster', y='AvgRate');
+
+# Plot outputs of regression
+plt.scatter(X_test, y_test,  color='black')
+plt.plot(X_test, lm.predict(X_test), color='blue',
+         linewidth=3)
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
