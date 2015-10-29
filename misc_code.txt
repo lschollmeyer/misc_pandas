@@ -124,3 +124,7 @@ df.drop('Longitude_y', axis=1, inplace=True)
 
 #delete dups in a dataframe
 q = q.drop_duplicates(["NBR_QUOT", "DATE_QUOT", "CITY_ORG", "ST_ORG", "DATE_LOAD"])
+
+#taking out outliers
+df = df[((df.AvgRate - df.AvgRate.mean()) / df.AvgRate.std()).abs() < 3]
+
