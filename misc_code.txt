@@ -130,3 +130,10 @@ df = df[((df.AvgRate - df.AvgRate.mean()) / df.AvgRate.std()).abs() < 3]
 
 #using converters in reading in data
 df = pd.read_excel('data/regionclusters.xlsx', converters={'ZIP Codes': lambda x: str(x)}) (edited)
+
+#unpivot data
+df = pd.melt(dat, id_vars=['Count'], value_vars=['Unnamed8', 'Unnamed9', 'Unnamed10',
+       'Unnamed11', 'Unnamed12', 'Unnamed13', 'Unnamed14', 'Unnamed15',
+       'Unnamed16', 'Unnamed17', 'Unnamed18', 'Unnamed19', 'Unnamed20',
+       'Unnamed21', 'Unnamed22', 'Unnamed23', 'Unnamed24', 'Unnamed25',
+       'Unnamed26', 'Unnamed27'])
