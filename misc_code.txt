@@ -137,3 +137,14 @@ df = pd.melt(dat, id_vars=['Count'], value_vars=['Unnamed8', 'Unnamed9', 'Unname
        'Unnamed16', 'Unnamed17', 'Unnamed18', 'Unnamed19', 'Unnamed20',
        'Unnamed21', 'Unnamed22', 'Unnamed23', 'Unnamed24', 'Unnamed25',
        'Unnamed26', 'Unnamed27'])
+
+#getting a file from a URL location, unzip it and load it as a pandas dataframe
+from io import StringIO, BytesIO
+import requests, zipfile
+
+url = 'http://www.opengeocode.org/download/cityzip.zip'
+r = requests.get(url)
+z = zipfile.ZipFile(BytesIO(r.content))
+df1 = pd.read_csv(z.open('cityzip.csv'))
+df1.head()
+
