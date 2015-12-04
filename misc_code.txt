@@ -148,3 +148,19 @@ z = zipfile.ZipFile(BytesIO(r.content))
 df1 = pd.read_csv(z.open('cityzip.csv'))
 df1.head()
 
+#finding non-float items
+cityzip.ix[:,~cityzip.applymap(np.isreal).all(axis=0)]
+
+#centroid
+from shapely.geometry import MultiPoint
+
+def getCentroid(clustId):
+    points = []
+    zip3 = clust.loc[(clust['cluster'] == clustId), 'zip3']
+    latlons = cityzip.loc[(cityzip['Postal'].str[:3].isin(zip3)), ['Latitude', 'Longitude']]
+    for index, rows in latlons.iterrows():
+        points.append([rows['Latitude'], rows['Longitude']])
+
+    centroid_point = MultiPoint(points).centroid       
+    return centroid_point.x, centroid_point.y
+
