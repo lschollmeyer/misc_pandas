@@ -47,6 +47,9 @@ df.append({"col1":"row3col1", "col2":"row3col2"}, ignore_index=True)
 #get rid of scientific notation 
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
+#more columns
+pandas.set_option('display.max_columns', 7)
+
 #add column to that df
 df["col3"] = ["row1col3", "row2col3", "row3col3"]
 
@@ -121,6 +124,9 @@ dfLL = pd.read_csv("/Users/tlps1/dev/projects/zipcodes.csv",dtype={"Zipcode" : "
 
 #delete a column 
 df.drop('Longitude_y', axis=1, inplace=True)
+
+#also
+del df['one']
 
 #delete dups in a dataframe
 q = q.drop_duplicates(["NBR_QUOT", "DATE_QUOT", "CITY_ORG", "ST_ORG", "DATE_LOAD"])
@@ -201,3 +207,11 @@ Image("http://ipython.org/_static/IPy_header.png")
 from IPython.lib.display import YouTubeVideo
 YouTubeVideo('SncapPrTusA', width=680, height=400)
 
+#bar plot of column counts
+pd.value_counts(df.NumberOfDependents).plot(kind='bar')
+
+#fill NA values with mean
+s.fillna(s.mean())
+
+#finding counts of null items for particular column
+print pd.value_counts(train.monthly_income.isnull())
