@@ -1,0 +1,6 @@
+#IPython environment to use for installing new stuff:
+terminal=>
+source activate <environment>
+Example:
+source activate devData34
+
