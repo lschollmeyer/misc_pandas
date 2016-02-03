@@ -215,3 +215,9 @@ s.fillna(s.mean())
 
 #finding counts of null items for particular column
 print pd.value_counts(train.monthly_income.isnull())
+
+#keyring example
+import keyring
+import mainframe_config as mc #this is a mainframe_config.py file with a dict object of credentials = { "userName" : "USERNAME" }
+pwd = keyring.get_password("mainframe", mc.credentials["userName"])
+df = prf.read_mainframe(vansql,mc.credentials["userName"], pwd)
