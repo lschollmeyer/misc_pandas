@@ -4,3 +4,15 @@ source activate <environment>
 Example:
 source activate devData34
 
+#manually start postgres through homebrew
+brew services start postgresql
+
+#and stopping....
+brew services stop postgresql
+
+#tc for seeing if something is running
+ps aux
+
+#can then grep for what you're looking for
+ps aux | grep postgres
+
