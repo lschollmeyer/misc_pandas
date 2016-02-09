@@ -221,3 +221,8 @@ import keyring
 import mainframe_config as mc #this is a mainframe_config.py file with a dict object of credentials = { "userName" : "USERNAME" }
 pwd = keyring.get_password("mainframe", mc.credentials["userName"])
 df = prf.read_mainframe(vansql,mc.credentials["userName"], pwd)
+
+
+#python as a framework issue
+I assume you have installed the pip matplotlib, there is a directory in you root called ~/.matplotlib.
+Create a file ~/.matplotlib/matplotlibrc there and add the following code: backend: TkAgg
