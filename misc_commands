@@ -16,3 +16,10 @@ ps aux
 #can then grep for what you're looking for
 ps aux | grep postgres
 
+#launchd logs
+ tail -f /var/log/system.log
+ 
+ #enable keychain utilization over ssh
+ 
+ security unlock-keychain -p <PASSWORD> ~/Library/Keychains/login.keychain
+
