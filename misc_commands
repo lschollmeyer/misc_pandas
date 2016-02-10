@@ -23,3 +23,8 @@ ps aux | grep postgres
  
  security unlock-keychain -p <PASSWORD> ~/Library/Keychains/login.keychain
 
+#scp
+
+scp <file> <username>@<IP address or hostname>:<Destination>
+
+
