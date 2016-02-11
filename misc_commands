@@ -24,7 +24,9 @@ ps aux | grep postgres
  security unlock-keychain -p <PASSWORD> ~/Library/Keychains/login.keychain
 
 #scp
-
 scp <file> <username>@<IP address or hostname>:<Destination>
+
+#find who is using a port
+lsof -i :PORT_NUMBER
 
 
