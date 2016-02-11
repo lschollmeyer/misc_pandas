@@ -29,4 +29,5 @@ scp <file> <username>@<IP address or hostname>:<Destination>
 #find who is using a port
 lsof -i :PORT_NUMBER
 
-
+#kill a process
+kill -9 PID
