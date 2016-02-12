@@ -31,3 +31,6 @@ lsof -i :PORT_NUMBER
 
 #kill a process
 kill -9 PID
+
+#forever start http.server
+forever start ./node_modules/http-server/bin/http-server ./ -p 8081 --cors
