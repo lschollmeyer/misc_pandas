@@ -1,0 +1,11 @@
+from sqlalchemy import create_engine
+from sqlalchemy.sql import text
+
+engine = create_engine('postgresql://<USERNAME>:<PASSWORD>@<INSTANCE>/<DATABASE>')
+
+#reading SQL from a file
+sql = open("sql/awesomesauce.sql").read()
+engine.execute(text(sql).execution_options(autocommit=True))
+
+#loading a pandas dataframe
+df = pd.read_sql_query(sql, engine)
