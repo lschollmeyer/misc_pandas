@@ -1,3 +1,14 @@
+#function to deal with wildcard matches and apply in df
+# here, I have two frames, df and dat. dat has a column, "states" that has multiple states in it as so: IL,IN,MO
+
+def get_AvgRate(row, dfDAT):
+    filter = (dfDAT["states"].str.contains(row["state"])) 
+    return dfDAT[filter]["rate"].mean()
+
+df["rate"] = df.apply(lambda x : get_AvgRate(x,dat), axis=1)
+
+
+
 #slicing df rows - this gets rows indexed on lines 7-14 in df "wine"
 wine[7:14]
 
