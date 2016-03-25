@@ -128,6 +128,9 @@ df.drop('Longitude_y', axis=1, inplace=True)
 #also
 del df['one']
 
+#change a column to numeric
+dat['T500Rate'] = pd.to_numeric(dat['T500Rate'], errors='coerce')
+
 #delete dups in a dataframe
 q = q.drop_duplicates(["NBR_QUOT", "DATE_QUOT", "CITY_ORG", "ST_ORG", "DATE_LOAD"])
 
