@@ -1,1 +1,7 @@
  text.replace(/[^a-z0-9]+/gi, " ");
+
+//converting json dates
+render: function(jsonDate){
+  var date = new Date(parseInt(jsonDate));
+  var month = date.getMonth() + 1;
+  return month + "/" + date.getDate() + '/' + date.getFullYear();
