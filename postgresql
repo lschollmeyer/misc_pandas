@@ -1,0 +1,44 @@
+--perform looping operation
+do $$
+DECLARE
+  r record; --"r" is a placeholder object for 
+BEGIN
+  -- r is a structure that contains an element for each column in the select list
+  FOR r IN select * from ug_cities
+  LOOP
+	update  ug_cities b
+	set 	citygroup = a.cityid
+	from 
+		ug_cities a
+	where 
+		ST_DWithin(a.geo, b.geo, 50*1609)  
+		AND a.cityid = r.cityid
+		and a.citygroup is null
+		and b.citygroup is null;
+		
+	update ug_cities 
+	set citygroup = r.cityid
+	where cityid = r.cityid
+		and citygroup is null;
+
+  END LOOP;
+END;
+$$;
+
+--JOIN with a closness geography of 50 miles
+select a.city as parentcity, a.state as parentstate, b.city, b.state--a.cityid as parentcity, b.cityid as childcity
+from 
+	ug_cities a 
+		JOIN
+	ug_cities b ON ST_DWithin(a.geo, b.geo, 50*1609) 
+where 
+	a.city <> b.city 
+	
+	--creating a geography point from lat/long
+	
+	update ug_cities
+set geo = ST_SetSRID(ST_MakePoint(longitude::float, latitude::float), 4326)
+
+--upsert
+with upsert as (update foo set bar = 'test2' where id = 1 returning *) 
+insert into foo (id, bar) select 1, 'test' where not exists(select * from upsert);
