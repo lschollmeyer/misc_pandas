@@ -240,3 +240,6 @@ df = prf.read_mainframe(vansql,mc.credentials["userName"], pwd)
 #python as a framework issue
 I assume you have installed the pip matplotlib, there is a directory in you root called ~/.matplotlib.
 Create a file ~/.matplotlib/matplotlibrc there and add the following code: backend: TkAgg
+
+#concantenate second column of rows with first column matches. Col1 is a key and has duplicates. We want all the n rows in col2 to show up assoicated with Col1
+df.groupby(['KEY_COMB_ORD']).agg(lambda col: ' '.join(col))
