@@ -43,3 +43,20 @@ for i in range(0, len(coded)-3, 3):
 
 print(decoded)
 
+#Hamming distance 
+s1 = 'GAGCCTACTAACGGGAT'
+s2 = 'CATCGTAATGACGGCCT'
+print([ a!=b for (a, b) in zip(s1, s2)].count(True))
+
+#Fibonacci rabbits sequence (immortal)
+#n = number of months
+#k = number of pairs
+
+n = 28
+k = 3
+
+rabbits = [0,1]
+for i in range(n-1):
+    rabbits[i % 2] = rabbits[(i-1) % 2] + k*rabbits[i % 2]
+
+rabbits[n % 2]
