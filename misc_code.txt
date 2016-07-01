@@ -243,3 +243,12 @@ Create a file ~/.matplotlib/matplotlibrc there and add the following code: backe
 
 #concantenate second column of rows with first column matches. Col1 is a key and has duplicates. We want all the n rows in col2 to show up assoicated with Col1
 df.groupby(['KEY_COMB_ORD']).agg(lambda col: ' '.join(col))
+
+import pandas_profiling as prf
+prf.ProfileReport(dfrate)
+
+#creating a geopandas geometry from lat, longs
+from shapely.geometry import Point
+rates['origin_geometry'] = rates.apply(lambda row: Point(float(row['lon']), float(row['lat'])), axis = 1)
+rates = rates.set_geometry('origin_geometry')
+
