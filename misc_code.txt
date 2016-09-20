@@ -252,3 +252,25 @@ from shapely.geometry import Point
 rates['origin_geometry'] = rates.apply(lambda row: Point(float(row['lon']), float(row['lat'])), axis = 1)
 rates = rates.set_geometry('origin_geometry')
 
+#best fit line on scatter plot
+def best_fit(X, Y):
+
+    xbar = sum(X)/len(X)
+    ybar = sum(Y)/len(Y)
+    n = len(X) # or len(Y)
+
+    numer = sum([xi*yi for xi,yi in zip(X, Y)]) - n * xbar * ybar
+    denum = sum([xi**2 for xi in X]) - n * xbar**2
+
+    b = numer / denum
+    a = ybar - b * xbar
+
+    print('best fit line:\ny = {:.2f} + {:.2f}x'.format(a, b))
+
+    return a, b
+    
+a,b = best_fit(df['temp'], df['cnt'])
+
+yfit = [a + b * xi for xi in df['temp']]
+p = plot(df['temp'], df['cnt'], 'o', alpha=0.5)
+plt.plot(df['temp'], yfit)
