@@ -274,3 +274,14 @@ a,b = best_fit(df['temp'], df['cnt'])
 yfit = [a + b * xi for xi in df['temp']]
 p = plot(df['temp'], df['cnt'], 'o', alpha=0.5)
 plt.plot(df['temp'], yfit)
+
+
+#leading zeros
+def handleZip(text):
+    try:
+        text = text.strip()
+        return text.rjust(5, '0')
+    except AttributeError:
+        return text
+        
+pd.read_csv('data.txt', converters = { 'zip': handleZip })
