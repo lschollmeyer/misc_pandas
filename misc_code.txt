@@ -285,3 +285,8 @@ def handleZip(text):
         return text
         
 pd.read_csv('data.txt', converters = { 'zip': handleZip })
+
+#stacking (melting) a data frame columns into rows
+# msa   Unemployment_2014   Unemployment_2015   Unemployment_2016
+# msa variable value
+unemp = pd.melt(unemp, id_vars='msa', value_vars=['Unemployment_2014', 'Unemployment_2015', 'Unemployment_2016'])
