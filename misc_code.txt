@@ -290,3 +290,9 @@ pd.read_csv('data.txt', converters = { 'zip': handleZip })
 # msa   Unemployment_2014   Unemployment_2015   Unemployment_2016
 # msa variable value
 unemp = pd.melt(unemp, id_vars='msa', value_vars=['Unemployment_2014', 'Unemployment_2015', 'Unemployment_2016'])
+
+#cartesian product - adding a year value (2011-2014) to each row in df
+df['key'] = 1
+dfyear = pd.DataFrame({'key':[1,1,1,1], 'year':[2011, 2012, 2013, 2014]})
+df = pd.merge(df, dfyear)
+del df['key']
