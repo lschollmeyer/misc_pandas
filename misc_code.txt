@@ -296,3 +296,13 @@ df['key'] = 1
 dfyear = pd.DataFrame({'key':[1,1,1,1], 'year':[2011, 2012, 2013, 2014]})
 df = pd.merge(df, dfyear)
 del df['key']
+
+#groupby date ranges
+multi_loads['pu_group'] = multi_loads.groupby(pd.Grouper(freq='2D',key='regd_pref_load_date_fk')).grouper.group_info[0]
+
+#aggregating with multiple aggregates
+aggregation = {'bill_lh_amt': 'sum', 
+                    'cubic_feet': 'sum',
+              'miles': 'mean'} 
+multi_load_group = multi_loads.groupby(['pu_group', 'del_group', 
+                     'orig_agent_zip', 'dest_agent_zip']).agg(aggregation).reset_index()
