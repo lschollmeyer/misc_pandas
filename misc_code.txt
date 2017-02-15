@@ -306,3 +306,8 @@ aggregation = {'bill_lh_amt': 'sum',
               'miles': 'mean'} 
 multi_load_group = multi_loads.groupby(['pu_group', 'del_group', 
                      'orig_agent_zip', 'dest_agent_zip']).agg(aggregation).reset_index()
+
+# find centroids
+geometry = [Point(xy) for xy in zip(origin_grp.origin_lon, origin_grp.origin_lat)]
+origin_grp['geometry'] = geometry
+origin_grp.groupby('origin_grp_id')['geometry'].agg(lambda x: gp.GeoSeries(x).unary_union.centroid)
